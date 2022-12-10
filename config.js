@@ -37,4 +37,4 @@ connection.connect((err)=>{
     }
 });
 
-module.exports =connnection;
+module.exports =connection;
