@@ -1,12 +1,12 @@
 const express = require("express");
-const con = require("./config");
+const connection = require("./config");
 const app = express();
 const cors = require('cors');
 
 app.use(cors());
 app.use(express.json());
 app.get("/compare/data", (req, resp) => {
-  con.query("select * from project", (err, result) => {
+  connection.query("select * from project", (err, result) => {
     if (err) { resp.send("error in api") }
     else { resp.send(result) }
   })
@@ -40,14 +40,14 @@ app.post("/compare/data", (req, res) => {
     
   ];
 
-  con.query(q, [values], (err, data) => {
+  connection.query(q, [values], (err, data) => {
     if (err) return res.send(err);
     return res.json(data);
   });
 });
 
 app.delete("/compare/data/:id",(req,resp)=>{
-  con.query("DELETE FROM `project` WHERE u_id="+req.params.id,(error,results)=>{
+  connection.query("DELETE FROM `project` WHERE u_id="+req.params.id,(error,results)=>{
     if(error) throw error;
     console.log(req.params.id)
     resp.send(results)
@@ -82,7 +82,7 @@ app.post("/compare/data/", (req, res) => {
     
   ];
 
-  con.query(q, [values], (err, data) => {
+  connection.query(q, [values], (err, data) => {
     if (err) return res.send(err);
     return res.json(data);
   });
